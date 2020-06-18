@@ -19,7 +19,9 @@ import 'package:charts_common/common.dart' as common
         BehaviorPosition,
         InsideJustification,
         OutsideJustification,
-        ChartBehavior;
+        ChartBehavior,
+        ChartBehaviorCallback;
+import 'package:charts_common/src/chart/common/behavior/range_annotation.dart';
 import 'package:meta/meta.dart' show immutable;
 import 'package:flutter/widgets.dart' show BuildContext, Widget;
 
@@ -69,4 +71,15 @@ enum GestureType {
   onTap,
   onHover,
   onDrag,
+}
+
+class ChartBehaviorCallback implements common.ChartBehaviorCallback {
+  final Function(AnnotationSegment<dynamic> segment, Rectangle<num> bounds) onBoundsCallback;
+
+  ChartBehaviorCallback({this.onBoundsCallback});
+
+  @override
+  void onBounds(AnnotationSegment<dynamic> segment, Rectangle<num> bounds) {
+    if(onBoundsCallback!=null) onBoundsCallback(segment, bounds);
+  }
 }

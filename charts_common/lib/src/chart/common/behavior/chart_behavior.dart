@@ -13,7 +13,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import 'dart:math' show Rectangle;
+
 import '../base_chart.dart';
+import 'range_annotation.dart';
 
 /// Interface for adding behavior to a chart.
 ///
@@ -63,4 +66,9 @@ enum OutsideJustification {
 enum InsideJustification {
   topStart,
   topEnd,
+}
+
+abstract class ChartBehaviorCallback {
+  /// send bounds as soon they were calculated
+  void onBounds(AnnotationSegment segment, Rectangle<num> bounds);
 }

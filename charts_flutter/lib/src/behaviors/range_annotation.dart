@@ -22,7 +22,8 @@ import 'package:charts_common/common.dart' as common
         Color,
         MaterialPalette,
         RangeAnnotation,
-        TextStyleSpec;
+        TextStyleSpec,
+        ChartBehaviorCallback;
 import 'package:collection/collection.dart' show ListEquality;
 import 'package:flutter/widgets.dart' show hashValues;
 import 'package:meta/meta.dart' show immutable;
@@ -64,6 +65,9 @@ class RangeAnnotation extends ChartBehavior<common.RangeAnnotation> {
   /// Space before and after label text.
   final int labelPadding;
 
+  /// callback to receive notifications about paint events
+  final common.ChartBehaviorCallback callback;
+
   RangeAnnotation(this.annotations,
       {common.Color defaultColor,
       this.defaultLabelAnchor,
@@ -71,7 +75,8 @@ class RangeAnnotation extends ChartBehavior<common.RangeAnnotation> {
       this.defaultLabelPosition,
       this.defaultLabelStyleSpec,
       this.extendAxis,
-      this.labelPadding})
+      this.labelPadding,
+      this.callback})
       : defaultColor = common.MaterialPalette.gray.shade100;
 
   @override
@@ -83,7 +88,8 @@ class RangeAnnotation extends ChartBehavior<common.RangeAnnotation> {
           defaultLabelPosition: defaultLabelPosition,
           defaultLabelStyleSpec: defaultLabelStyleSpec,
           extendAxis: extendAxis,
-          labelPadding: labelPadding);
+          labelPadding: labelPadding,
+          callback: callback);
 
   @override
   void updateCommonBehavior(common.RangeAnnotation commonBehavior) {}

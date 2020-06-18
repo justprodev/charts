@@ -165,7 +165,7 @@ export 'src/bar_chart.dart';
 export 'src/base_chart.dart' show BaseChart, LayoutConfig;
 export 'src/behaviors/a11y/domain_a11y_explore_behavior.dart'
     show DomainA11yExploreBehavior;
-export 'src/behaviors/chart_behavior.dart' show ChartBehavior;
+export 'src/behaviors/chart_behavior.dart' show ChartBehavior, ChartBehaviorCallback;
 export 'src/behaviors/domain_highlighter.dart' show DomainHighlighter;
 export 'src/behaviors/initial_selection.dart' show InitialSelection;
 export 'src/behaviors/calculation/percent_injector.dart' show PercentInjector;

@@ -38,7 +38,7 @@ import '../../layout/layout_view.dart'
 import '../base_chart.dart' show BaseChart, LifecycleListener;
 import '../chart_canvas.dart' show ChartCanvas, getAnimatedColor;
 import '../processed_series.dart' show MutableSeries;
-import 'chart_behavior.dart' show ChartBehavior;
+import 'chart_behavior.dart' show ChartBehavior, ChartBehaviorCallback;
 
 /// Chart behavior that annotates domain ranges with a solid fill color.
 ///
@@ -104,6 +104,9 @@ class RangeAnnotation<D> implements ChartBehavior<D> {
   // in the new data.
   final _currentKeys = <String>[];
 
+  /// callback to receive notifications about paint events
+  final ChartBehaviorCallback callback;
+
   RangeAnnotation(this.annotations,
       {Color defaultColor,
       AnnotationLabelAnchor defaultLabelAnchor,
@@ -112,7 +115,7 @@ class RangeAnnotation<D> implements ChartBehavior<D> {
       TextStyleSpec defaultLabelStyleSpec,
       bool extendAxis,
       int labelPadding,
-      double defaultStrokeWidthPx})
+      double defaultStrokeWidthPx, this.callback})
       : defaultColor = StyleFactory.style.rangeAnnotationColor,
         defaultLabelAnchor = defaultLabelAnchor ?? _defaultLabelAnchor,
         defaultLabelDirection = defaultLabelDirection ?? _defaultLabelDirection,
@@ -418,6 +421,8 @@ class _RangeAnnotationLayoutView<D> extends LayoutView {
       // labels. We always expect those to end up outside, since the bounds will
       // have zero width or  height.
       final bounds = _getAnnotationBounds(annotationElement);
+
+      rangeAnnotation.callback?.onBounds(annotationElement.annotationSegment, bounds);
 
       if (annotationElement.isRange) {
         // Draw the annotation.

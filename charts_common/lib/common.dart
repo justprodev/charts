@@ -121,6 +121,7 @@ export 'src/chart/common/behavior/chart_behavior.dart'
     show
         BehaviorPosition,
         ChartBehavior,
+        ChartBehaviorCallback,
         InsideJustification,
         OutsideJustification;
 export 'src/chart/common/behavior/chart_title/chart_title.dart'
